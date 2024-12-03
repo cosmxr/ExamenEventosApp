@@ -62,8 +62,4 @@
 
 ---
 
-## Instalación  
-
-1. Clona el repositorio:  
-   ```bash
-   git clone https://github.com/cosmxr/ExamenEventosApp.git
+link al repositorio: https://github.com/cosmxr/ExamenEventosApp.git
