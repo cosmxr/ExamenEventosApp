@@ -13,16 +13,21 @@ import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import java.util.*
 
+//pantalla para añadir una asignatura al horario
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddScheduleScreen(navController: NavController, scheduleState: MutableState<Map<String, Map<String, Pair<String, String>>>>) {
+    //variables para guardar los datos de la asignatura
     var selectedSubject by remember { mutableStateOf("") }
     var expandedSubject by remember { mutableStateOf(false) }
-    val subjects = listOf("Matemáticas", "Historia", "Literatura", "Biologia", "Física")
+    //listado de asignaturas
+    val subjects = listOf("Matemáticas", "Historia", "Literatura", "Biologia", "Física", "Química", "Inglés")
 
+    //variables para guardar los datos del dia
     var selectedDay by remember { mutableStateOf("") }
     var expandedDay by remember { mutableStateOf(false) }
+    //listado de dias
     val days = listOf("Lunes", "Martes", "Miercoles", "Jueves", "Viernes")
 
     var selectedStartTime by remember { mutableStateOf("") }
@@ -37,15 +42,16 @@ fun AddScheduleScreen(navController: NavController, scheduleState: MutableState<
                 .padding(16.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            // Subject Dropdown
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
+                //boton para seleccionar la asignatura
                 Button(onClick = { expandedSubject = true }) {
                     Text(text = if (selectedSubject.isEmpty()) "Selecciona asignatura" else selectedSubject)
                 }
+                //menu desplegable con las asignaturas
                 DropdownMenu(
                     expanded = expandedSubject,
                     onDismissRequest = { expandedSubject = false }
@@ -64,15 +70,16 @@ fun AddScheduleScreen(navController: NavController, scheduleState: MutableState<
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Day Dropdown
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
+                //boton para seleccionar el dia
                 Button(onClick = { expandedDay = true }) {
                     Text(text = if (selectedDay.isEmpty()) "Selecciona el día" else selectedDay)
                 }
+                //menu desplegable con los dias
                 DropdownMenu(
                     expanded = expandedDay,
                     onDismissRequest = { expandedDay = false }
@@ -91,15 +98,16 @@ fun AddScheduleScreen(navController: NavController, scheduleState: MutableState<
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Start Time Picker
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
+                //boton para seleccionar la hora de inicio
                 Button(onClick = {
                     val calendar = Calendar.getInstance()
-                    val timePickerDialog = TimePickerDialog(
+                    val timePickerDialog = TimePickerDialog( //timePicker para seleccionar la
+                        // hora con un reloj
                         context,
                         { _, hourOfDay, minute ->
                             selectedStartTime = String.format("%02d:%02d", hourOfDay, minute)
@@ -110,21 +118,23 @@ fun AddScheduleScreen(navController: NavController, scheduleState: MutableState<
                     )
                     timePickerDialog.show()
                 }) {
-                    Text(text = if (selectedStartTime.isEmpty()) "Selecciona hora de inicio" else selectedStartTime)
+                    Text(text = if (selectedStartTime.isEmpty()) "Selecciona hora de inicio"
+                    else selectedStartTime)
                 }
             }
 
             Spacer(modifier = Modifier.height(8.dp))
-
-            // End Time Picker
+            //Finaliza timePickerDialog
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
+                //boton para seleccionar la hora de finalización
                 Button(onClick = {
                     val calendar = Calendar.getInstance()
-                    val timePickerDialog = TimePickerDialog(
+                    val timePickerDialog = TimePickerDialog( //timepicker tambien para
+                        // seleccionar la hora de finalizacion
                         context,
                         { _, hourOfDay, minute ->
                             selectedEndTime = String.format("%02d:%02d", hourOfDay, minute)
@@ -141,7 +151,7 @@ fun AddScheduleScreen(navController: NavController, scheduleState: MutableState<
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Submit Button
+            //boton para guardar la asignatura
             Button(onClick = {
                 coroutineScope.launch {
                     if (selectedDay.isNotEmpty() && selectedStartTime.isNotEmpty() && selectedEndTime.isNotEmpty() && selectedSubject.isNotEmpty()) {

@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
+//pantalla para ver el horario
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,6 +45,7 @@ fun ViewScheduleScreen(navController: NavController, schedule: Map<String, Map<S
                 Button(onClick = { expandedDay = true }) {
                     Text(text = if (selectedDay.isEmpty()) "Selecciona el día" else selectedDay)
                 }
+                //dropdown menu para seleccionar el dia
                 DropdownMenu(
                     expanded = expandedDay,
                     onDismissRequest = { expandedDay = false }
@@ -61,7 +63,7 @@ fun ViewScheduleScreen(navController: NavController, schedule: Map<String, Map<S
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-
+//se comprueba que asignatura se ha seleccionado y se improme por pantalla
             if (selectedDay.isNotEmpty()) {
                 val daySchedule = schedule[selectedDay] ?: emptyMap()
                 val sortedSchedule = daySchedule.toSortedMap()
@@ -69,7 +71,7 @@ fun ViewScheduleScreen(navController: NavController, schedule: Map<String, Map<S
                 Column {
                     sortedSchedule.forEach { (startTime, endTimeSubjectPair) ->
                         val (endTime, subject) = endTimeSubjectPair
-                        Card(
+                        Card( //formato del evento en la impresion por pantalla
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 4.dp),

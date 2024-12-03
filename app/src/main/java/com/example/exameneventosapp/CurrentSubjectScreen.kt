@@ -1,5 +1,6 @@
 package com.example.exameneventosapp
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -10,6 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
+//pantalla para mostrar la asignatura actual
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CurrentSubjectScreen(navController: NavController, subject: String?) {
@@ -18,6 +21,7 @@ fun CurrentSubjectScreen(navController: NavController, subject: String?) {
             TopAppBar(
                 title = { Text("Asignatura Actual") },
                 navigationIcon = {
+                    //boton para volver a la pantalla principal
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
                     }
@@ -25,6 +29,7 @@ fun CurrentSubjectScreen(navController: NavController, subject: String?) {
             )
         }
     ) {
+        //mensaje con la asignatura actual
         Column(
             modifier = Modifier
                 .fillMaxSize()

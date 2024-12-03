@@ -7,6 +7,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
+//tema de la app
 private val LightColorScheme = lightColorScheme(
     primary = Color(	0xFF757575),
     primaryContainer = Color(0xFF3700B3),

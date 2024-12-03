@@ -23,12 +23,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
-
+//clase principal de la aplicación
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //configuración de la ventana
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             ExameneventosappTheme {
@@ -42,6 +43,7 @@ class MainActivity : ComponentActivity() {
                         TopAppBar(
                             title = { Text("") },
                             navigationIcon = {
+                                //iconbutton para volver a la pantalla principal
                                 if (currentRoute != "main") {
                                     IconButton(onClick = { navController.navigateUp() }) {
                                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
@@ -55,6 +57,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) {
+                    //encargado de la navegacion
                     NavHost(navController = navController, startDestination = "main") {
                         composable("main") { MainScreen(navController, schedule.value) }
                         composable("addSchedule") { AddScheduleScreen(navController, schedule) }
@@ -69,6 +72,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    //pantalla principal de la aplicación
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -83,14 +87,17 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            //boton para agregar una asignatura
             Button(onClick = { navController.navigate("addSchedule") }) {
                 Text(text = "Agregar Asignatura", fontSize = 18.sp)
             }
             Spacer(modifier = Modifier.height(16.dp))
+            //boton para ver el horario
             Button(onClick = { navController.navigate("viewSchedule") }) {
                 Text(text = "Ver Horario", fontSize = 18.sp)
             }
             Spacer(modifier = Modifier.height(16.dp))
+            //boton para ver la asignatura actual
             Button(onClick = { currentSubjectHelper.showCurrentSubject(schedule) }) {
                 Text(text = "Asignatura Actual", fontSize = 18.sp)
             }
