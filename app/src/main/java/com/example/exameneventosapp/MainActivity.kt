@@ -22,7 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.exameneventosapp.ui.theme.ExameneventosappTheme
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = {
                         TopAppBar(
-                            title = { Text("ExamenEventosApp") },
+                            title = { Text("") },
                             navigationIcon = {
                                 if (currentRoute != "main") {
                                     IconButton(onClick = { navController.navigateUp() }) {
